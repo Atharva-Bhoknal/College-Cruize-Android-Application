@@ -8,8 +8,6 @@
     tools:context=".MainPage">
 
 
-
-
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,9 +21,9 @@
 
 
     <RelativeLayout
+        android:id="@+id/centerline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/centerline"
         android:layout_centerInParent="true">
 
     </RelativeLayout>
@@ -37,25 +35,17 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_above="@id/centerline"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="275dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/dm_mono"
             android:text="Welcome Back !"
-            android:textSize="42sp"
-            android:textColor="#FFBD4D"
+            android:textColor="#49ACE1"
+            android:textSize="34sp"
             android:textStyle="bold">
-
-        </TextView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Log In To Continue"
-            android:textColor="#F44336"
-            android:textSize="23sp">
 
         </TextView>
 
@@ -67,7 +57,7 @@
         android:layout_above="@+id/email"
         app:lottie_autoPlay="true"
         app:lottie_rawRes="@raw/animation_llt02t3e"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         app:lottie_loop="true">
 
     </com.airbnb.lottie.LottieAnimationView>
@@ -77,40 +67,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/centerline"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:id="@+id/email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Email"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeWidthFocused="2dp"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/black"
+        android:textColorHint="@color/grey"
+        app:startIconDrawable="@android:drawable/sym_action_email"
+        app:startIconTint="#000000"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
+        app:hintTextColor="@color/blue"
+
         >
 
-        <EditText
-            android:id="@+id/loginemail"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Email"
-            android:inputType="textEmailAddress">
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:inputType="textEmailAddress" />
 
-        </EditText>
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/centerline"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/password"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
+        android:hint="Password"
+        android:textColorHint="@color/grey"
+        app:hintTextColor="@color/blue"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeWidthFocused="2dp"
+        app:endIconTint="@color/black"
         app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/black"
+        app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
+        app:startIconTint="#171515"
         >
 
-        <EditText
-            android:id="@+id/loginpassword"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pass"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Password">
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:inputType="textPassword" />
 
-        </EditText>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -129,9 +139,10 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginStart="8dp"
+            android:letterSpacing="0.15"
             android:text="Log In"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold">
 
         </TextView>
@@ -144,13 +155,49 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/login"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
-        android:text="Forgot Password"
+        android:text="Forgot Password ?"
         android:textAlignment="center"
         android:textColor="@color/black">
 
     </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:paddingLeft="5dp"
+        android:layout_centerInParent="true"
+        android:paddingEnd="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal"
+        android:background="@drawable/border"
+        android:layout_below="@+id/gotoforgotpassword"
+        >
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:maxHeight="50dp"
+            android:maxWidth="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/google_logo"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue with Google"
+            android:textColor="#6A6A6A"
+            android:layout_marginEnd="15dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/gotosignup"
@@ -159,16 +206,17 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/button_design">
+        android:layout_marginBottom="10dp"
+        >
 
         <TextView
+            android:id="@+id/signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginStart="8dp"
             android:text="New User! Want To Sign In ?"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold">
 
