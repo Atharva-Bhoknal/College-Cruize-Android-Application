@@ -9,9 +9,9 @@
 
 
     <RelativeLayout
+        android:id="@+id/centerline2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/centerline2"
         android:layout_centerInParent="true">
 
     </RelativeLayout>
@@ -32,6 +32,7 @@
             android:text="New User !"
             android:textColor="#FFBD4D"
             android:textSize="42sp"
+            android:inputType="textEmailAddress"
             android:textStyle="bold">
 
         </TextView>
@@ -81,7 +82,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/mobile_box"
+            android:id="@+id/signup_mobile_no"
             android:hint="Mobile No."
             android:inputType="phone"
             >
@@ -102,9 +103,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/uname_box"
+            android:id="@+id/uname"
             android:hint="UserName"
-            android:inputType="phone"
+            android:inputType="text"
             >
 
         </EditText>
@@ -127,7 +128,8 @@
             android:id="@+id/signpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Password">
+            android:inputType="textPassword"
+            android:hint="Password">
 
         </EditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -140,6 +142,7 @@
         android:layout_below="@id/password"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
+        android:onClick="sign_up"
         android:layout_marginRight="30dp"
         android:background="@drawable/button_design">
 
