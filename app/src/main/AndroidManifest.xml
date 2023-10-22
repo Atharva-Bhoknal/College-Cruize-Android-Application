@@ -19,6 +19,12 @@
             android:name=".Home_page"
             android:exported="false" />
         <activity
+            android:name=".profile"
+            android:exported="false" />
+        <activity
+            android:name=".home"
+            android:exported="false" />
+        <activity
             android:name=".splash"
             android:exported="false" />
         <activity
