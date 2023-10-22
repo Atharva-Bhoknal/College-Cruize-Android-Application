@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "365078659593",
+    "project_id": "college-cruise-pccoer",
+    "storage_bucket": "college-cruise-pccoer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365078659593:android:b788635837ad84af502ed8",
+        "android_client_info": {
+          "package_name": "com.example.projectbikepool"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz4lMKsMjqgY3gH1eqtVxJXFD3exunFzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

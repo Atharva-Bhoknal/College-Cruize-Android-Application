@@ -74,7 +74,7 @@ public class MainPage extends AppCompatActivity {
 
                                 Toast.makeText(getApplicationContext(), "Login in Successful", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(MainPage.this, Home_page.class);
+                                Intent intent = new Intent(MainPage.this, create_ride.class);
 //                                intent.putExtra("NAME",get_DBName);
 //                                intent.putExtra("Email",get_DBEmail);
                                 startActivity(intent);
