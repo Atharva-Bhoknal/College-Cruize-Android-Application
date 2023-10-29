@@ -102,6 +102,7 @@
                                 android:layout_height="64dp"
                                 android:background="@drawable/circle_red1"
                                 android:padding="15dp"
+                                android:id="@+id/crt"
                                 android:src="@drawable/baseline_add_circle_24" />
 
                             <View
