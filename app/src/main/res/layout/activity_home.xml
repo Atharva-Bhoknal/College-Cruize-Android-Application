@@ -153,7 +153,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/pr_bg_hm"
                             android:gravity="center"
-
+                            android:onClick="visit_profile"
                             android:orientation="horizontal">
 
 
@@ -272,7 +272,7 @@
                                 android:text="Help"
                                 android:layout_marginStart="150dp"
                                 android:textColor="@color/white"
-                                android:textSize="30sp"
+                                android:textSize="35sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>

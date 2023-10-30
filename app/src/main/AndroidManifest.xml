@@ -40,17 +40,14 @@
 
         <activity
             android:name=".profile"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".home"
+            android:theme="@style/Theme.Material3.DayNight"/>
         <activity
             android:name=".home"
-            android:exported="true"
-            android:theme="@style/Theme.Material3.DayNight">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false"
+            android:theme="@style/Theme.Material3.DayNight"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".splash"
             android:exported="false" />
@@ -59,8 +56,12 @@
             android:exported="false" />
         <activity
             android:name=".MainPage"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data
