@@ -47,6 +47,13 @@ public class MainPage extends AppCompatActivity {
                 startActivity(new Intent(MainPage.this,MainActivity.class));
             }
         });
+
+        //Stay logged in
+        if (firebaseUser!=null)
+        {
+            finish();
+            startActivity(new Intent(MainPage.this, home.class));
+        }
     }
 
     public void Login(View view) {

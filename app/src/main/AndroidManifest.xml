@@ -42,15 +42,17 @@
         <activity
             android:name=".create_ride"
             android:exported="false" />
-        <activity
-            android:name=".Home_page"
-            android:exported="false" />
+
         <activity
             android:name=".profile"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".home"
+            android:theme="@style/Theme.Material3.DayNight"/>
         <activity
             android:name=".home"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Material3.DayNight"/>
+
         <activity
             android:name=".splash"
             android:exported="false" />
