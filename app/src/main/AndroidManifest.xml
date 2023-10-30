@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -28,8 +29,12 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCDjQDUlyaeGDN8t7DMUD8MgAH0U8urmBo" />
+            android:value="YOUR_API_KEY" />
 
+        <activity
+            android:name=".direction"
+            android:exported="false"
+            android:label="@string/title_activity_direction" />
         <activity
             android:name=".Ride_Create"
             android:exported="false"

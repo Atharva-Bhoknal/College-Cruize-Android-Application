@@ -7,8 +7,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FF3EB8EF"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Create Ride"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="61dp"
         >
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -20,4 +40,103 @@
         tools:context=".Ride_Create" />
 
     </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="461dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2.5dp" android:layout_gravity="center"
+                android:background="@color/dim_gray"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Pick Up Location:-"
+                android:textSize="18dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+
+            <Spinner
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:id="@+id/spinnerlocation"
+                style="@style/CardView">
+
+
+            </Spinner>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2.5dp" android:layout_gravity="center"
+                android:background="@color/dim_gray"
+                android:layout_marginBottom="10dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="Enter Your UPI ID....!"
+                android:textSize="24dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:id="@+id/upiofuser"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2.5dp" android:layout_gravity="center"
+                android:background="@color/dim_gray"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Arrival Time:-"
+                android:textSize="18dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <TimePicker
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:numbersSelectorColor="#FF3EB8EF"
+                android:id="@+id/arrivaltime"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2.5dp" android:layout_gravity="center"
+                android:background="@color/dim_gray"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:text="Create Ride"
+                android:id="@+id/crt_ride"
+                android:layout_gravity="center"
+                android:backgroundTint="#FF3EB8EF"/>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
 </RelativeLayout>
