@@ -1,9 +1,13 @@
 package com.example.projectbikepool;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,23 +17,30 @@ import java.util.Objects;
 
 public class home extends AppCompatActivity {
 
-    ImageView crtbtn;
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        crtbtn=(ImageView) findViewById(R.id.crt);
+        ActionBar actionBar=getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#1E90FF"));
+        assert actionBar != null;
+        actionBar.setTitle("College Cruze PCCOER");
+        actionBar.setBackgroundDrawable(colorDrawable);
 
-        crtbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(home.this,Ride_Create.class);
-                startActivity(intent);
-            }
-        });
 
+        // methods to display the icon in the ActionBar
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+
+
+    }
+
+    public void crt_ride(View view) {
+        Intent intent = new Intent(home.this,Ride_Create.class);
+        startActivity(intent);
     }
 }

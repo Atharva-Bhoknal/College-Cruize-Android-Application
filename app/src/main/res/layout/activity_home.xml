@@ -7,33 +7,9 @@
     tools:context=".home">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#FF3EB8EF"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="College Cruze"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"/>
-
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            android:layout_marginTop="15dp">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,18 +31,18 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="270dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="vertical">
 
                     <com.airbnb.lottie.LottieAnimationView
                         android:layout_width="match_parent"
-                        android:layout_height="270dp"
-                        android:layout_marginTop="35dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+
                         android:layout_marginBottom="10dp"
-                        android:scaleX="1.5"
-                        android:scaleY="1.5"
+                        android:scaleX="2"
+                        android:scaleY="2"
                         app:lottie_autoPlay="true"
                         app:lottie_loop="true"
                         app:lottie_rawRes="@raw/bike">
@@ -80,47 +56,43 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:gravity="center"
-                    android:orientation="horizontal"
+
+                    android:orientation="vertical"
                     android:paddingTop="20dp">
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/food"
-                        android:layout_width="130dp"
+                        android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_margin="10dp"
+
                         app:cardElevation="5dp">
 
                         <LinearLayout
+                            android:id="@+id/crt"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#FF3EB8EF"
+                            android:background="@drawable/gradient_color_bg"
                             android:gravity="center"
-                            android:orientation="vertical">
+                            android:onClick="crt_ride"
+                            android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:background="@drawable/circle_red1"
-                                android:padding="15dp"
-                                android:id="@+id/crt"
-                                android:src="@drawable/baseline_add_circle_24" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@color/black" />
-
+                                android:src="@drawable/baseline_add_circle_24"
+                                android:layout_marginEnd="50dp"
+                                android:layout_gravity="center"
+                                />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
                                 android:padding="5dp"
                                 android:text="Create Ride"
-                                android:textColor="?android:textColorPrimary"
-                                android:textSize="18dp"
+                                android:layout_marginRight="0dp"
+                                android:textColor="@color/white"
+                                android:textSize="30sp"
                                 android:textStyle="bold" />
-
 
                         </LinearLayout>
 
@@ -128,7 +100,7 @@
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cloth"
-                        android:layout_width="130dp"
+                        android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_margin="10dp"
                         app:cardElevation="5dp">
@@ -136,32 +108,23 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#FF3EB8EF"
+                            android:background="@drawable/bookride_bg_hm"
                             android:gravity="center"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
-                                android:background="@drawable/circle_purple"
-                                android:padding="15dp"
-                                android:src="@drawable/book_ride" />
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@color/black" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
                                 android:padding="5dp"
                                 android:text="Book Ride"
-                                android:textColor="?android:textColorPrimary"
-                                android:textSize="18dp"
+                                android:textColor="@color/white"
+                                android:textSize="30sp"
+                                android:layout_marginRight="150dp"
                                 android:textStyle="bold" />
+
+
 
 
                         </LinearLayout>
@@ -175,52 +138,12 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/money"
-                        android:layout_width="130dp"
-                        android:layout_height="150dp"
-                        android:layout_margin="10dp"
-                        app:cardElevation="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="#FF3EB8EF"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
-                                android:background="@drawable/circle_pink"
-                                android:padding="15dp"
-                                android:src="@drawable/history" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@color/black" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:padding="5dp"
-                                android:text="History"
-                                android:textColor="@color/black"
-                                android:textSize="18dp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/profile"
-                        android:layout_width="130dp"
+                        android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_margin="10dp"
                         app:cardElevation="5dp">
@@ -228,36 +151,65 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#FF3EB8EF"
+                            android:background="@drawable/pr_bg_hm"
                             android:gravity="center"
-                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
-                                android:background="@drawable/circle_yellow"
-                                android:padding="15dp"
-                                android:src="@drawable/profile" />
+                            android:orientation="horizontal">
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@color/black" />
+
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
                                 android:padding="5dp"
                                 android:text="Profile"
-                                android:textColor="@color/black"
-                                android:textSize="18dp"
+                                android:layout_marginLeft="200dp"
+                                android:textColor="@color/white"
+                                android:textSize="35sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
                     </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/money"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/gradient_color_bg2"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="History"
+                                android:textColor="@color/white"
+                                android:textSize="35sp"
+                                android:layout_marginRight="70dp"
+                                android:textStyle="bold" />
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:src="@drawable/history"
+                                android:layout_gravity="center"
+                                />
+
+
+
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
 
                 </LinearLayout>
 
@@ -267,11 +219,11 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/setting"
-                        android:layout_width="130dp"
+                        android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_margin="10dp"
                         app:cardElevation="5dp">
@@ -279,31 +231,19 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#FF3EB8EF"
+                            android:background="@drawable/set_crd_bg"
                             android:gravity="center"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
-                                android:background="@drawable/circle_red"
-                                android:padding="15dp"
-                                android:src="@drawable/setting" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@color/black" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
                                 android:padding="5dp"
-                                android:text="Setting"
-                                android:textColor="@color/black"
-                                android:textSize="18dp"
+                                android:text="Settings"
+                                android:layout_marginRight="150dp"
+                                android:textColor="@color/white"
+                                android:textSize="35sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -312,7 +252,7 @@
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/pet"
-                        android:layout_width="130dp"
+                        android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_margin="10dp"
                         app:cardElevation="5dp">
@@ -320,31 +260,19 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#FF3EB8EF"
+                            android:background="@drawable/help_bg_cr"
                             android:gravity="center"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
-                                android:background="@drawable/circle_green"
-                                android:padding="15dp"
-                                android:src="@drawable/baseline_help_24" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@color/black" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
                                 android:padding="5dp"
                                 android:text="Help"
-                                android:textColor="@color/black"
-                                android:textSize="18dp"
+                                android:layout_marginStart="150dp"
+                                android:textColor="@color/white"
+                                android:textSize="30sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
