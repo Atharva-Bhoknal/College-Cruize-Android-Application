@@ -1,15 +1,21 @@
 package com.example.projectbikepool;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,7 +29,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public class direction extends FragmentActivity implements OnMapReadyCallback {
+public class direction extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private String pickuplocation,time;
@@ -39,6 +45,12 @@ public class direction extends FragmentActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar=getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#1E90FF"));
+        assert actionBar != null;
+        actionBar.setTitle("Create Ride");
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         binding = ActivityDirectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -100,4 +112,12 @@ public class direction extends FragmentActivity implements OnMapReadyCallback {
         }
 
     }
+
+    public void onReached(View view)
+    {
+        Intent intent=new Intent(direction.this, home.class);
+        finish();
+        startActivity(intent);
+    }
+
 }

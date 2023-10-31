@@ -5,30 +5,14 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#FF3EB8EF"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Create Ride"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"/>
-
-
-    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="61dp"
+        android:layout_height="290dp"
+        android:id="@+id/map_layout"
+        android:layout_margin="5dp"
+        android:foreground="@drawable/border_map"
         >
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -41,10 +25,22 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2.5dp" android:layout_gravity="center"
+        android:background="@color/dim_gray"
+        android:id="@+id/line"
+        android:layout_below="@+id/map_layout"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="461dp">
+        android:layout_below="@+id/line">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,14 +48,9 @@
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:paddingBottom="20dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="2.5dp" android:layout_gravity="center"
-                android:background="@color/dim_gray"
-                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,13 +78,22 @@
                 android:background="@color/dim_gray"
                 android:layout_marginBottom="10dp"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter you UPI ID :-"
+                android:textSize="18dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:hint="Enter Your UPI ID....!"
+                android:layout_height="wrap_content"
+                android:hint="UPI ID"
                 android:textSize="24dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:inputType="text"
                 android:id="@+id/upiofuser"
                 android:layout_marginBottom="10dp"/>
 
@@ -116,6 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
+                android:timePickerMode="spinner"
                 android:numbersSelectorColor="#FF3EB8EF"
                 android:id="@+id/arrivaltime"/>
 
@@ -126,9 +127,11 @@
                 android:layout_marginBottom="10dp"/>
 
             <Button
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:text="Create Ride"
+                android:letterSpacing="0.3"
+                android:fontFamily="sans-serif-medium"
                 android:id="@+id/crt_ride"
                 android:layout_gravity="center"
                 android:backgroundTint="#FF3EB8EF"/>

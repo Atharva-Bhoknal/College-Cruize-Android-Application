@@ -110,6 +110,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/bookride_bg_hm"
                             android:gravity="center"
+                            android:onClick="visit_book_ride"
                             android:orientation="horizontal">
 
 
@@ -142,7 +143,7 @@
 
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/profile"
+                        android:id="@+id/setting"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_margin="10dp"
@@ -151,19 +152,18 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/pr_bg_hm"
+                            android:background="@drawable/set_crd_bg"
                             android:gravity="center"
-                            android:onClick="visit_profile"
+                            android:onClick="req_visit"
                             android:orientation="horizontal">
-
 
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
-                                android:text="Profile"
-                                android:layout_marginLeft="200dp"
+                                android:text="Pickup Requests"
+                                android:layout_marginRight="150dp"
                                 android:textColor="@color/white"
                                 android:textSize="35sp"
                                 android:textStyle="bold" />
@@ -171,6 +171,7 @@
                         </LinearLayout>
 
                     </com.google.android.material.card.MaterialCardView>
+
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/money"
@@ -222,7 +223,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/setting"
+                        android:id="@+id/profile"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_margin="10dp"
@@ -231,17 +232,19 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/set_crd_bg"
+                            android:background="@drawable/pr_bg_hm"
                             android:gravity="center"
+                            android:onClick="visit_profile"
                             android:orientation="horizontal">
+
 
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
-                                android:text="Settings"
-                                android:layout_marginRight="150dp"
+                                android:text="Profile"
+                                android:layout_marginLeft="200dp"
                                 android:textColor="@color/white"
                                 android:textSize="35sp"
                                 android:textStyle="bold" />

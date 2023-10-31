@@ -7,27 +7,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#FF3EB8EF"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Create Ride"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"/>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="61dp"
+        android:layout_height="350dp"
+        android:layout_margin="5dp"
+        android:foreground="@drawable/border_map"
         android:id="@+id/maplayout">
 
 
@@ -108,10 +90,11 @@
         </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="60dp"
+        android:weightSum="2"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_gravity="center">
@@ -122,6 +105,7 @@
             android:layout_height="50dp"
             android:backgroundTint="#FF3EB8EF"
             android:text="Directions"
+            android:layout_weight="1"
             android:layout_marginRight="15dp"
             android:id="@+id/directionbtn"
             android:layout_gravity="center"
@@ -130,9 +114,11 @@
         <Button
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:layout_weight="1"
             android:backgroundTint="@color/black"
             android:text="Reached"
             android:id="@+id/Reached"
+            android:onClick="onReached"
             android:layout_marginLeft="15dp"
             android:layout_gravity="center"
             />

@@ -48,4 +48,14 @@ public class home extends AppCompatActivity {
         Intent intent = new Intent(home.this,profile.class);
         startActivity(intent);
     }
+
+    public void visit_book_ride(View view) {
+        Intent intent = new Intent(home.this,Book_Ride.class);
+        startActivity(intent);
+    }
+
+    public void req_visit(View view) {
+        Intent intent = new Intent(home.this,Ride_requestes.class);
+        startActivity(intent);
+    }
 }

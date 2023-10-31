@@ -1,13 +1,18 @@
 package com.example.projectbikepool;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -31,15 +36,24 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.projectbikepool.databinding.ActivityRideCreateBinding;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.HashMap;
+
 import java.util.StringJoiner;
 
-public class Ride_Create extends FragmentActivity  {
+public class Ride_Create extends AppCompatActivity {
 
     private GoogleMap mMap;
     String Upi;
@@ -54,23 +68,32 @@ public class Ride_Create extends FragmentActivity  {
     String[] pickuplocs= {"Select Location","Dharmaraj Chowk,Ravet,Pune","Ravet Chowk,Ravet,Pune", "Akurdi Railway Station,Akurdi,Pune", "Ravet Bridge,Akurdi,Pune"};
     private String pickuplocation;
 //    private String pickuplocation;
-
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore db ;
+    FirebaseUser firebaseUser;
     String live_location;
     FusedLocationProviderClient client;
-
     private SupportMapFragment mapFragment;
     private  int REQUEST_CODE = 111;
     public String Ulatitude, Ulongitude;
-
+    Context context;
     private TimePicker artpk;
     String hrs,min,time;
 
     Button create_ride;
 
+    String name,email,mob;
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar=getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#1E90FF"));
+        assert actionBar != null;
+        actionBar.setTitle("Create Ride");
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         binding = ActivityRideCreateBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -96,9 +119,36 @@ public class Ride_Create extends FragmentActivity  {
             throw new RuntimeException(e);
         }
 
+        //Get user data
+        db= FirebaseFirestore.getInstance();
+        context = getApplicationContext();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+        email=firebaseUser.getEmail();
+        try {
+            DocumentReference documentReference = db.collection("Users").document(email);
+            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        name = documentSnapshot.getString("Name");
+                        mob = documentSnapshot.getString("MobileNo");
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                }
+            });
+        }
+        catch (Exception e){
+            Toast.makeText(context, "Error occured", Toast.LENGTH_SHORT).show();
+        }
+
 
         upiid=findViewById(R.id.upiofuser);
-        Upi=upiid.getText().toString();
+
 
 
 //        ######### SPINNER CODE ##############
@@ -138,6 +188,8 @@ public class Ride_Create extends FragmentActivity  {
                 Intent intent= new Intent(Ride_Create.this,direction.class);
                 intent.putExtra("pickuplocation",pickuplocation);
                 intent.putExtra("time",time);
+                Upi=upiid.getText().toString();
+                insertDataDb();
                 startActivity(intent);
             }
         });
@@ -158,8 +210,6 @@ public class Ride_Create extends FragmentActivity  {
 
 
     }
-
-
 
 
 //    ######### CURRETNT LOCATION ############
@@ -233,7 +283,33 @@ public class Ride_Create extends FragmentActivity  {
 
         }
 
+    private void insertDataDb() {
 
+        Map<String, Object> ride_details = new HashMap<>();
+        ride_details.put("Name", name);
+        ride_details.put("MobileNo", mob);
+        ride_details.put("Email", email);
+        ride_details.put("Location",pickuplocation );
+        ride_details.put("Time",time );
+        ride_details.put("UPI ID",Upi);
+
+        db.collection("Rides Available")
+                .document(email)
+                .set(ride_details).
+                addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(Ride_Create.this, "Ride Created", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Ride_Create.this, "An Error Occurred Failed to Create Ride", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+    }
 
 }
 

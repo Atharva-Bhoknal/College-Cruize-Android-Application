@@ -50,9 +50,6 @@ public class profile extends AppCompatActivity {
         actionBar.setBackgroundDrawable(colorDrawable);
 
 
-        // methods to display the icon in the ActionBar
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
