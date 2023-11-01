@@ -10,10 +10,12 @@ import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.TypedValue;
@@ -28,6 +30,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectbikepool.databinding.ActivityBookRideBinding;
+import com.example.projectbikepool.databinding.ActivityRideCreateBinding;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,11 +56,20 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Book_Ride extends AppCompatActivity {
+    private int REQUEST_CODE = 111 ;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     FirebaseFirestore firestore ;
+    String live_location;
+    private ActivityBookRideBinding binding;
+    double Ulatt,Ulongi;
+
+    private SupportMapFragment mapFragment;
+
+    public String Ulatitude, Ulongitude;
     Context context;
     private Spinner locspinner;
     CardView cardview;
@@ -61,17 +82,28 @@ public class Book_Ride extends AppCompatActivity {
     String[] pickuplocs= {"Select Location","Dharmaraj Chowk,Ravet,Pune","Ravet Chowk,Ravet,Pune", "Akurdi Railway Station,Akurdi,Pune", "Ravet Bridge,Akurdi,Pune"};
     private String pickuplocation;
     String data="";
+    FusedLocationProviderClient client;
 
+
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_ride);
+//        setContentView(R.layout.activity_book_ride);
 
         ActionBar actionBar=getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#1E90FF"));
         assert actionBar != null;
         actionBar.setTitle("Book Ride");
         actionBar.setBackgroundDrawable(colorDrawable);
+
+        binding = ActivityBookRideBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.bookridemap);
+        client = LocationServices.getFusedLocationProviderClient(this);
+        getCurrentLocation();
 
         swipeRefreshLayout = findViewById(R.id.refreshlayout);
         swipeRefreshLayout.setColorSchemeColors(Color.RED);
@@ -93,6 +125,15 @@ public class Book_Ride extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(Book_Ride.this , android.Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(Book_Ride.this , new String[]{Manifest.permission.SEND_SMS}, 100);
         }
+
+        if (ActivityCompat.checkSelfPermission(Book_Ride.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            getCurrentLocation();
+        }else{
+            ActivityCompat.requestPermissions(Book_Ride.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+        }
+
 
         email=firebaseUser.getEmail();
         try {
@@ -133,6 +174,59 @@ public class Book_Ride extends AppCompatActivity {
 
 
 
+    }
+
+    private void getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Task<Location> task = client.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if(location != null){
+                    mapFragment.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(@NonNull GoogleMap googleMap) {
+
+                            //this is for getting current location
+                            LatLng latLng1= new LatLng(location.getLatitude(), location.getLongitude());
+
+                            Ulatt = location.getLatitude();
+                            Ulongi = location.getLongitude();
+
+                            Ulatitude = String.valueOf(Ulatt);    // string for storing value of user lattitude (Current Live)
+                            Ulongitude = String.valueOf(Ulongi);  // string for storing value of user longitute (Current Live)
+
+                            //showUlocation.setText("Your Location: " + "\n" + "Latitude: " + Ulatitude + "\n" + "Longitude: " + Ulongitude);
+                            // To display langitute and lattitube on the screen
+
+                            //make textview (id as a "showUlocation")in xml and find view by id in java
+
+                            //  https://www.tutorialspoint.com/how-to-get-current-location-latitude-and-longitude-in-android  this website used as a reference for getting current location values
+
+                            LatLng latLng= new LatLng(location.getLatitude(), location.getLongitude());
+
+                            live_location = String.valueOf(latLng);
+
+
+                            MarkerOptions markerOptions= new MarkerOptions().position(latLng).title("You Are Here");
+
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
+
+                            Objects.requireNonNull(googleMap.addMarker(markerOptions)).showInfoWindow();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void addDataToView(String name, String riderEmail, String riderMobile, String time) {
