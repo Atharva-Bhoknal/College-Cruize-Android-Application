@@ -56,7 +56,7 @@ public class ride_details extends AppCompatActivity {
 
     CardView cardview;
 
-    SwipeRefreshLayout swipeRefreshLayout;
+
     String doc,email,name,mobile,rider_email,rider_name,rider_mob,pickuplocation;
     String data="";
     @Override
@@ -70,14 +70,6 @@ public class ride_details extends AppCompatActivity {
         actionBar.setTitle("Your Ride");
         actionBar.setBackgroundDrawable(colorDrawable);
 
-        swipeRefreshLayout = findViewById(R.id.refreshlayout);
-        swipeRefreshLayout.setColorSchemeColors(Color.RED);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                recreate();
-            }
-        });
 
         firestore= FirebaseFirestore.getInstance();
         context = getApplicationContext();
@@ -133,7 +125,15 @@ public class ride_details extends AppCompatActivity {
         );
         layoutparams.setMargins(10, 15, 10, 15);
         linearLayoutInner.setBackground(getDrawable(R.drawable.cardview_bg));
-        cardview.setLayoutParams(layoutparams);
+
+        LinearLayout.LayoutParams layoutparamscardview = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutparamscardview.setMargins(15, 15, 15, 15);
+
+
+        cardview.setLayoutParams(layoutparamscardview);
         cardview.setRadius(15);
         cardview.setPadding(25, 25, 25, 25);
         cardview.setMaxCardElevation(30);
@@ -141,7 +141,8 @@ public class ride_details extends AppCompatActivity {
         textview = new TextView(getApplicationContext());
         textview.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         textview.setLayoutParams(layoutparams);
-        String text = "Passenger Name: " + name + "\nPassanger Email: " + email + "\nPassenger Mobile No:" + mobile +"\nRider Name : "+riderName+"\nRider Email : "+riderEmail+"\nRider Mobile No:"+riderMob +"Pick up location : "+pickuplocation;
+
+        String text = "Passenger Name: " + name + "\nPassanger Email: " + email + "\nPassenger Mobile No:" + mobile +"\nRider Name : "+riderName+"\nRider Email : "+riderEmail+"\nRider Mobile No:"+riderMob +"\nPick up location : "+pickuplocation;
         textview.setText(text);
         textview.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
         textview.setTextColor(Color.WHITE);

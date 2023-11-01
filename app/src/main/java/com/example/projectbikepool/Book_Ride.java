@@ -77,8 +77,7 @@ public class Book_Ride extends AppCompatActivity {
     TextView textview;
     String documentID;
     LinearLayout linearLayout;
-    SwipeRefreshLayout swipeRefreshLayout;
-    String doc,email,mobile,name,time,rider_name,rider_email,rider_mobile;
+    String doc,email,mobile,name,time,rider_name,rider_email,rider_mobile,loc;
     String[] pickuplocs= {"Select Location","Dharmaraj Chowk,Ravet,Pune","Ravet Chowk,Ravet,Pune", "Akurdi Railway Station,Akurdi,Pune", "Ravet Bridge,Akurdi,Pune"};
     private String pickuplocation;
     String data="";
@@ -105,14 +104,7 @@ public class Book_Ride extends AppCompatActivity {
         client = LocationServices.getFusedLocationProviderClient(this);
         getCurrentLocation();
 
-        swipeRefreshLayout = findViewById(R.id.refreshlayout);
-        swipeRefreshLayout.setColorSchemeColors(Color.RED);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                recreate();
-            }
-        });
+
 
         firestore= FirebaseFirestore.getInstance();
         context = getApplicationContext();
@@ -163,7 +155,13 @@ public class Book_Ride extends AppCompatActivity {
         locspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                pickuplocation= locspinner.getItemAtPosition(i).toString();
+                if(i==0)
+                {
+                    search_ridesAll();
+                }
+                else {
+                    pickuplocation = locspinner.getItemAtPosition(i).toString();
+                }
             }
 
             @Override
@@ -229,7 +227,7 @@ public class Book_Ride extends AppCompatActivity {
         });
     }
 
-    private void addDataToView(String name, String riderEmail, String riderMobile, String time) {
+    private void addDataToView(String name, String riderEmail, String riderMobile, String time,String loc) {
 
         cardview = new CardView(getApplicationContext());
         LinearLayout linearLayoutInner = new LinearLayout(getApplicationContext());
@@ -240,7 +238,15 @@ public class Book_Ride extends AppCompatActivity {
         );
         layoutparams.setMargins(10, 15, 10, 15);
 
-        cardview.setLayoutParams(layoutparams);
+
+        LinearLayout.LayoutParams layoutparamscardview = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutparamscardview.setMargins(15, 15, 15, 15);
+
+
+        cardview.setLayoutParams(layoutparamscardview);
         cardview.setRadius(15);
         cardview.setPadding(25, 25, 25, 25);
         cardview.setCardBackgroundColor(Color.parseColor("#36BFB1"));
@@ -249,7 +255,7 @@ public class Book_Ride extends AppCompatActivity {
         textview = new TextView(getApplicationContext());
         textview.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         textview.setLayoutParams(layoutparams);
-        String text = "Name: " + rider_name + "\nRider Email: " + riderEmail + "\nRider Mobile No:" + riderMobile + "\nTime of arrival: " + time ;
+        String text = "Name: " + rider_name + "\nRider Email: " + riderEmail + "\nRider Mobile No:" + riderMobile + "\nTime of arrival: " + time+"\nLocation : "+loc ;
         textview.setText(text);
         textview.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
         textview.setTextColor(Color.WHITE);
@@ -330,6 +336,8 @@ public class Book_Ride extends AppCompatActivity {
 
 
     public void search_rides(View view) {
+        linearLayout.removeAllViews();
+
         try {
 
             firestore.collection("Rides Available").addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -339,15 +347,47 @@ public class Book_Ride extends AppCompatActivity {
                         for (DocumentChange documentChange : value.getDocumentChanges()) {
                             doc = documentChange.getDocument().getId();
                             data = data + " " + doc;
+
+
+
                             if(pickuplocation.equals(documentChange.getDocument().getData().get("Location").toString())) {
                                 rider_name = documentChange.getDocument().getData().get("Name").toString();
                                 rider_email = documentChange.getDocument().getData().get("Email").toString();
                                 rider_mobile = documentChange.getDocument().getData().get("MobileNo").toString();
                                 time = documentChange.getDocument().getData().get("Time").toString();
-
-                                addDataToView(name, rider_email, rider_mobile, time);
+                                loc=documentChange.getDocument().getData().get("Location").toString();
+                                addDataToView(name, rider_email, rider_mobile, time,loc);
                             }
 
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(Book_Ride.this, "An error Occured!!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
+        catch (Exception e){
+            Toast.makeText(context, "No Rides Available", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void search_ridesAll() {
+
+        linearLayout.removeAllViews();
+        try {
+            firestore.collection("Rides Available").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    try {
+                        for (DocumentChange documentChange : value.getDocumentChanges()) {
+                            doc = documentChange.getDocument().getId();
+                            data = data + " " + doc;
+                                rider_name = documentChange.getDocument().getData().get("Name").toString();
+                                rider_email = documentChange.getDocument().getData().get("Email").toString();
+                                rider_mobile = documentChange.getDocument().getData().get("MobileNo").toString();
+                                time = documentChange.getDocument().getData().get("Time").toString();
+                                loc=documentChange.getDocument().getData().get("Location").toString();
+                                addDataToView(name, rider_email, rider_mobile, time,loc);
                         }
                     } catch (Exception e) {
                         Toast.makeText(Book_Ride.this, "An error Occured!!", Toast.LENGTH_SHORT).show();

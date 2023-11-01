@@ -6,7 +6,9 @@
         <!-- Status bar color. -->
 
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">#000000</item>
         <item name="android:windowTranslucentNavigation">true</item>
+
     </style>
 
     <style name="Theme.ProjectBikePool" parent="Base.Theme.ProjectBikePool" />
