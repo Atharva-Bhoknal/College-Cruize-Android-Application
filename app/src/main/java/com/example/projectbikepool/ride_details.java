@@ -11,9 +11,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.TypedValue;
@@ -21,6 +23,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +42,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ride_details extends AppCompatActivity {
@@ -61,9 +65,9 @@ public class ride_details extends AppCompatActivity {
         setContentView(R.layout.activity_ride_details);
 
         ActionBar actionBar=getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#1E90FF"));
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#2b87d9"));
         assert actionBar != null;
-        actionBar.setTitle("Pickup requests");
+        actionBar.setTitle("Your Ride");
         actionBar.setBackgroundDrawable(colorDrawable);
 
         swipeRefreshLayout = findViewById(R.id.refreshlayout);
@@ -104,14 +108,14 @@ public class ride_details extends AppCompatActivity {
                             mobile = documentChange.getDocument().getData().get("Passenger MobileNo").toString();
                             rider_name = documentChange.getDocument().getData().get("Rider Name").toString();
                             rider_email = documentChange.getDocument().getData().get("Rider Email").toString();
-                            rider_mob = documentChange.getDocument().getData().get("Rider MobileNo").toString();
+                            rider_mob = documentChange.getDocument().getData().get("Rider Mobile").toString();
                             pickuplocation = documentChange.getDocument().getData().get("Pick up Location").toString();
 
                             addDataToView(name, mobile, email, rider_name, rider_email, rider_mob, pickuplocation);
                         }
                     }
                 } catch (Exception e) {
-                    Toast.makeText(ride_details.this, "An error Occured!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ride_details.this, "You don't have any rides", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -128,11 +132,10 @@ public class ride_details extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         layoutparams.setMargins(10, 15, 10, 15);
-
+        linearLayoutInner.setBackground(getDrawable(R.drawable.cardview_bg));
         cardview.setLayoutParams(layoutparams);
         cardview.setRadius(15);
         cardview.setPadding(25, 25, 25, 25);
-        cardview.setCardBackgroundColor(Color.parseColor("#7B68EE"));
         cardview.setMaxCardElevation(30);
         cardview.setMaxCardElevation(6);
         textview = new TextView(getApplicationContext());
@@ -146,37 +149,63 @@ public class ride_details extends AppCompatActivity {
         textview.setGravity(Gravity.CENTER);
         linearLayoutInner.addView(textview);
 
-        Button delete = new Button(getApplicationContext());
-        delete.setOnClickListener(new View.OnClickListener() {
+        Button call = new Button(getApplicationContext());
+        call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
+                try {
+                    String url="tel:"+riderMob.toString();
+                    //        Intent intent=new Intent(Intent.ACTION_DIAL, Uri.parse(url));
+                    Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse(url));
+                    startActivity(intent);
+                }
+                catch (Exception e){
+                    Toast.makeText(context, "An Error Occurred Please Check Entered Number", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
-        delete.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        call.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 //        delete.setLayoutParams(layoutparams);
-        delete.setText("Confirm");
-        delete.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        call.setText("CALL");
+        call.setLayoutParams(layoutparams);
+        call.setHapticFeedbackEnabled(true);
 
-//        Button Cancel = new Button(getApplicationContext());
-//        Cancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//        Cancel.setLayoutParams(layoutparams);
-//        Cancel.setText("Cancel");
-//        Cancel.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        call.setBackground(getDrawable(R.drawable.button_design));
 
-//        linearLayoutInner.addView(Cancel);
-        linearLayoutInner.addView(delete);
+        call.setLetterSpacing(0.2f);
+        call.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+
+        Button payment = new Button(getApplicationContext());
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        payment.setLayoutParams(layoutparams);
+        payment.setText("Make Payment");
+        payment.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        payment.setLayoutParams(layoutparams);
+        payment.setHapticFeedbackEnabled(true);
+        payment.setBackground(getDrawable(R.drawable.button_design));
+        payment.setPadding(25,0,25,0);
+        payment.setLetterSpacing(0.2f);
+        LinearLayout linearbtn = new LinearLayout(getApplicationContext());
+
+        linearbtn.addView(call);
+        linearbtn.addView(payment);
         linearLayoutInner.setLayoutParams(layoutparams);
+        linearbtn.setLayoutParams(layoutparams);
+        linearLayoutInner.addView(linearbtn);
         linearLayoutInner.setOrientation(LinearLayout.VERTICAL);
         cardview.addView(linearLayoutInner);
+
         linearLayout.addView(cardview);
+
     }
 
 

@@ -125,7 +125,7 @@ public class Ride_requestes extends AppCompatActivity {
         cardview.setLayoutParams(layoutparams);
         cardview.setRadius(15);
         cardview.setPadding(25, 25, 25, 25);
-        cardview.setCardBackgroundColor(Color.parseColor("#90EE90"));
+        cardview.setCardBackgroundColor(Color.parseColor("#2b87d9"));
         cardview.setMaxCardElevation(30);
         cardview.setMaxCardElevation(6);
         textview = new TextView(getApplicationContext());
