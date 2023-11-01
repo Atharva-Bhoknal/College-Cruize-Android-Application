@@ -50,7 +50,7 @@ public class Ride_requestes extends AppCompatActivity {
 
     CardView cardview;
 
-    SwipeRefreshLayout swipeRefreshLayout;
+
     String email,name,mobile,pass_email,pass_name,pass_mob,pickuplocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +63,7 @@ public class Ride_requestes extends AppCompatActivity {
         actionBar.setTitle("Pickup requests");
         actionBar.setBackgroundDrawable(colorDrawable);
 
-        swipeRefreshLayout = findViewById(R.id.refreshlayout);
-        swipeRefreshLayout.setColorSchemeColors(Color.RED);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                recreate();
-            }
-        });
+
 
         firestore= FirebaseFirestore.getInstance();
         context = getApplicationContext();
@@ -122,7 +115,14 @@ public class Ride_requestes extends AppCompatActivity {
         );
         layoutparams.setMargins(10, 15, 10, 15);
 
-        cardview.setLayoutParams(layoutparams);
+        LinearLayout.LayoutParams layoutparamscardview = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutparamscardview.setMargins(15, 15, 15, 15);
+
+
+        cardview.setLayoutParams(layoutparamscardview);
         cardview.setRadius(15);
         cardview.setPadding(25, 25, 25, 25);
         cardview.setCardBackgroundColor(Color.parseColor("#2b87d9"));
