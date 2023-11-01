@@ -32,6 +32,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -124,7 +125,8 @@ public class ride_details extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         layoutparams.setMargins(10, 15, 10, 15);
-        linearLayoutInner.setBackground(getDrawable(R.drawable.cardview_bg));
+        //linearLayoutInner.setBackground(getDrawable(R.drawable.cardview_bg));
+        cardview.setCardBackgroundColor(Color.parseColor("#4dafe8"));
 
         LinearLayout.LayoutParams layoutparamscardview = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -150,7 +152,8 @@ public class ride_details extends AppCompatActivity {
         textview.setGravity(Gravity.CENTER);
         linearLayoutInner.addView(textview);
 
-        Button call = new Button(getApplicationContext());
+      //  Button call = new Button(getApplicationContext());
+        MaterialButton call = new MaterialButton(this);
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,13 +177,13 @@ public class ride_details extends AppCompatActivity {
         call.setText("CALL");
         call.setLayoutParams(layoutparams);
         call.setHapticFeedbackEnabled(true);
+        call.setIcon(ContextCompat.getDrawable(this,R.drawable.baseline_call_24));
 
-        call.setBackground(getDrawable(R.drawable.button_design));
-
+        call.setBackgroundColor(getColor(R.color.dark_cyan));
         call.setLetterSpacing(0.2f);
         call.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
 
-        Button payment = new Button(getApplicationContext());
+        MaterialButton payment = new MaterialButton(this);
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,7 +195,9 @@ public class ride_details extends AppCompatActivity {
         payment.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
         payment.setLayoutParams(layoutparams);
         payment.setHapticFeedbackEnabled(true);
-        payment.setBackground(getDrawable(R.drawable.button_design));
+        payment.setIcon(ContextCompat.getDrawable(this,R.drawable.baseline_payment_24));
+
+        payment.setBackgroundColor(getColor(R.color.dark_cyan));
         payment.setPadding(25,0,25,0);
         payment.setLetterSpacing(0.2f);
         LinearLayout linearbtn = new LinearLayout(getApplicationContext());
