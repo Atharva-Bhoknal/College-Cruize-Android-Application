@@ -25,6 +25,7 @@ public class MainPage extends AppCompatActivity {
     String email_regex = "^[A-Za-z0-9+_.-]+@(.+)$";
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
+
     FirebaseFirestore db;
     public static String get_DBName,get_DBEmail;
     @Override
