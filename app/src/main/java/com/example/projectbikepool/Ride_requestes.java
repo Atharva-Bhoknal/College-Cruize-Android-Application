@@ -52,7 +52,7 @@ public class Ride_requestes extends AppCompatActivity {
     CardView cardview;
 
 
-    String email,name,mobile,pass_email,pass_name,pass_mob,pickuplocation;
+    String email,name,mobile,pass_email,pass_name,pass_mob,pickuplocation,upi,dt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,8 +92,10 @@ public class Ride_requestes extends AppCompatActivity {
                         pickuplocation = documentSnapshot.getString("Pick up Location");
                         name=documentSnapshot.getString("Rider Name");
                         mobile=documentSnapshot.getString("Rider MobileNo");
+                        upi=documentSnapshot.getString("UPI ID");
+                        dt=documentSnapshot.getString("Date");
                         Toast.makeText(context,""+email+""+name+""+mobile+""+pass_email+""+pass_name+""+pass_mob+""+pickuplocation,Toast.LENGTH_SHORT);
-                        addDataToView(email,name,mobile,pass_email,pass_name,pass_mob,pickuplocation);
+                        addDataToView(email,name,mobile,pass_email,pass_name,pass_mob,pickuplocation,upi,dt);
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -105,7 +107,7 @@ public class Ride_requestes extends AppCompatActivity {
 
     }
 
-    private void addDataToView(String email, String name, String mobile, String passEmail, String passName, String passMob, String pickuplocation) {
+    private void addDataToView(String email, String name, String mobile, String passEmail, String passName, String passMob, String pickuplocation,String upi,String dt) {
 
         cardview = new CardView(getApplicationContext());
         LinearLayout linearLayoutInner = new LinearLayout(getApplicationContext());
@@ -154,6 +156,8 @@ public class Ride_requestes extends AppCompatActivity {
                                     ord_data.put("Rider Email", email);
                                     ord_data.put("Rider Mobile", mobile);
                                     ord_data.put("Pick up Location", pickuplocation);
+                                    ord_data.put("UPI ID", upi);
+                                    ord_data.put("Date", dt);
 
 
                                     firestore.collection("Booked Rides")

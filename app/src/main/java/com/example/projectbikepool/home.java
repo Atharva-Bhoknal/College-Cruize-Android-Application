@@ -68,6 +68,10 @@ public class home extends AppCompatActivity {
         Intent intent = new Intent(home.this,ride_details.class);
         startActivity(intent);
     }
+    public void open_his(View view) {
+        Intent intent = new Intent(home.this,History.class);
+        startActivity(intent);
+    }
 
 
 }

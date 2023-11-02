@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -22,10 +22,15 @@
         android:theme="@style/Theme.ProjectBikePool"
         tools:targetApi="31">
         <activity
-            android:name=".ride_details"
+            android:name=".History"
             android:exported="false"
             android:parentActivityName=".home"
             android:theme="@style/Theme.Material3.DayNight"/>
+        <activity
+            android:name=".ride_details"
+            android:exported="false"
+            android:parentActivityName=".home"
+            android:theme="@style/Theme.Material3.DayNight" />
         <activity
             android:name=".Ride_requestes"
             android:exported="false"

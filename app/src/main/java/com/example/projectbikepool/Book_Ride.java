@@ -55,6 +55,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -78,12 +80,11 @@ public class Book_Ride extends AppCompatActivity {
     TextView textview;
     String documentID;
     LinearLayout linearLayout;
-    String doc,email,mobile,name,time,rider_name,rider_email,rider_mobile,loc;
+    String doc,email,mobile,name,time,rider_name,rider_email,rider_mobile,loc,upi_id;
     String[] pickuplocs= {"Select Location","Dharmaraj Chowk,Ravet,Pune","Ravet Chowk,Ravet,Pune", "Akurdi Railway Station,Akurdi,Pune", "Ravet Bridge,Akurdi,Pune"};
     private String pickuplocation;
     String data="";
     FusedLocationProviderClient client;
-
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -228,7 +229,10 @@ public class Book_Ride extends AppCompatActivity {
         });
     }
 
-    private void addDataToView( String riderEmail, String riderMobile, String time,String loc) {
+    private void addDataToView( String riderEmail, String riderMobile, String time,String loc,String upi_id) {
+        SimpleDateFormat formatter = new SimpleDateFormat("E dd/MM/yyyy 'at' hh:mm:ss a");
+        Date date = new Date();
+        String dt= formatter.format(date);
 
         cardview = new CardView(getApplicationContext());
         LinearLayout linearLayoutInner = new LinearLayout(getApplicationContext());
@@ -292,6 +296,8 @@ public class Book_Ride extends AppCompatActivity {
                                     ord_data.put("Rider Email", riderEmail);
                                     ord_data.put("Rider MobileNo", riderMobile);
                                     ord_data.put("Pick up Location", loc);
+                                    ord_data.put("UPI ID", upi_id);
+                                    ord_data.put("Date", dt);
 
 
                                     firestore.collection("Requests")
@@ -359,7 +365,8 @@ public class Book_Ride extends AppCompatActivity {
                                 rider_mobile = documentChange.getDocument().getData().get("MobileNo").toString();
                                 time = documentChange.getDocument().getData().get("Time").toString();
                                 loc=documentChange.getDocument().getData().get("Location").toString();
-                                addDataToView( rider_email, rider_mobile, time,loc);
+                                upi_id=documentChange.getDocument().getData().get("UPI ID").toString();
+                                addDataToView( rider_email, rider_mobile, time,loc,upi_id);
                             }
 
                         }
@@ -390,7 +397,9 @@ public class Book_Ride extends AppCompatActivity {
                                 rider_mobile = documentChange.getDocument().getData().get("MobileNo").toString();
                                 time = documentChange.getDocument().getData().get("Time").toString();
                                 loc=documentChange.getDocument().getData().get("Location").toString();
-                                addDataToView( rider_email, rider_mobile, time,loc);
+                                upi_id=documentChange.getDocument().getData().get("UPI ID").toString();
+
+                                addDataToView( rider_email, rider_mobile, time,loc,upi_id);
                         }
                     } catch (Exception e) {
                         Toast.makeText(Book_Ride.this, "An error Occured!!", Toast.LENGTH_SHORT).show();
