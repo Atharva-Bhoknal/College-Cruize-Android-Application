@@ -30,8 +30,6 @@ public class home extends AppCompatActivity {
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#1E90FF"));
         assert actionBar != null;
         actionBar.setTitle("College Cruze PCCOER");
-
-
         actionBar.setBackgroundDrawable(colorDrawable);
 
 
