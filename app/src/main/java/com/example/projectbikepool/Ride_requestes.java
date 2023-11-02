@@ -128,7 +128,7 @@ public class Ride_requestes extends AppCompatActivity {
         cardview.setLayoutParams(layoutparamscardview);
         cardview.setRadius(15);
         cardview.setPadding(25, 25, 25, 25);
-        cardview.setCardBackgroundColor(Color.parseColor("#2b87d9"));
+        cardview.setCardBackgroundColor(Color.parseColor("#66CDAA"));
         cardview.setMaxCardElevation(30);
         cardview.setMaxCardElevation(6);
         textview = new TextView(getApplicationContext());
@@ -220,7 +220,7 @@ public class Ride_requestes extends AppCompatActivity {
 //        delete.setLayoutParams(layoutparams);
         delete.setText("Confirm");
         delete.setIcon(ContextCompat.getDrawable(this,R.drawable.baseline_check_box_24));
-        delete.setBackgroundColor(getColor(R.color.dark_cyan));
+        delete.setBackgroundColor(getColor(R.color.dark_green));
         delete.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
 
@@ -234,6 +234,7 @@ public class Ride_requestes extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+                                recreate();
                                 Toast.makeText(Ride_requestes.this, "Pickup cancelled", Toast.LENGTH_SHORT).show();
                                 try {
                                     String msg = "Hey " + pass_name + " sorry I cant pick you.";
@@ -257,7 +258,7 @@ public class Ride_requestes extends AppCompatActivity {
         Cancel.setText("Cancel");
         Cancel.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         Cancel.setIcon(ContextCompat.getDrawable(this,R.drawable.baseline_cancel_24));
-        Cancel.setBackgroundColor(getColor(R.color.dark_cyan));
+        Cancel.setBackgroundColor(getColor(R.color.crimson));
 
         linearLayoutInner.addView(Cancel);
         linearLayoutInner.addView(delete);

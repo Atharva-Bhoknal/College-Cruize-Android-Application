@@ -137,7 +137,7 @@ public class ride_details extends AppCompatActivity {
         );
         layoutparams.setMargins(10, 15, 10, 15);
         //linearLayoutInner.setBackground(getDrawable(R.drawable.cardview_bg));
-        cardview.setCardBackgroundColor(Color.parseColor("#4dafe8"));
+        cardview.setCardBackgroundColor(Color.parseColor("#66CDAA"));
 
         LinearLayout.LayoutParams layoutparamscardview = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -385,9 +385,9 @@ public class ride_details extends AppCompatActivity {
 
 
             try {
-                String msg = "Hey :"+name+" thanks for picking as rider. \nHope you have enjoyed your ride.\nHave a nice day!!";
+                String msg = "Hey :"+rider_name+" thanks for picking me. \nYour payment is done.\nHave a nice day!!";
                 SmsManager smgr = SmsManager.getDefault();
-                smgr.sendTextMessage("8080728482", null, msg, null, null);
+                smgr.sendTextMessage(rider_mob, null, msg, null, null);
                 Toast.makeText(ride_details.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Toast.makeText(ride_details.this, "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();

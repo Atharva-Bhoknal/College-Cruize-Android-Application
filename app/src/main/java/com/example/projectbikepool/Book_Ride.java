@@ -254,7 +254,7 @@ public class Book_Ride extends AppCompatActivity {
         cardview.setLayoutParams(layoutparamscardview);
         cardview.setRadius(15);
         cardview.setPadding(25, 25, 25, 25);
-        cardview.setCardBackgroundColor(Color.parseColor("#36BFB1"));
+        cardview.setCardBackgroundColor(Color.parseColor("#008B8B"));
         cardview.setMaxCardElevation(30);
         cardview.setMaxCardElevation(6);
         textview = new TextView(getApplicationContext());
