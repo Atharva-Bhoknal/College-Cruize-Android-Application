@@ -27,15 +27,9 @@ public class home extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         ActionBar actionBar=getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#1E90FF"));
-        assert actionBar != null;
-        actionBar.setTitle("College Cruze PCCOER");
-        actionBar.setBackgroundDrawable(colorDrawable);
+        actionBar.hide();
 
 
-        // methods to display the icon in the ActionBar
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
