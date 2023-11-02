@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -131,15 +132,16 @@ public class Ride_requestes extends AppCompatActivity {
         textview = new TextView(getApplicationContext());
         textview.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         textview.setLayoutParams(layoutparams);
-        String text = "Passanger Name: " + passName + "\nPassanger Email: " + passEmail + "\nMobile No:" + passMob + "Pick up location : "+pickuplocation;
+        String text = "Passanger Name: " + passName + "\nPassanger Email: " + passEmail + "\nMobile No:" + passMob + "\nPick up location : "+pickuplocation;
         textview.setText(text);
+
         textview.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
         textview.setTextColor(Color.WHITE);
         textview.setPadding(25, 25, 25, 25);
         textview.setGravity(Gravity.CENTER);
         linearLayoutInner.addView(textview);
 
-        Button delete = new Button(getApplicationContext());
+        MaterialButton delete = new MaterialButton(this);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,9 +215,12 @@ public class Ride_requestes extends AppCompatActivity {
         delete.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 //        delete.setLayoutParams(layoutparams);
         delete.setText("Confirm");
+        delete.setIcon(ContextCompat.getDrawable(this,R.drawable.baseline_check_box_24));
+        delete.setBackgroundColor(getColor(R.color.dark_cyan));
         delete.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
-        Button Cancel = new Button(getApplicationContext());
+
+        MaterialButton Cancel = new MaterialButton(this);
         Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -247,11 +252,14 @@ public class Ride_requestes extends AppCompatActivity {
         Cancel.setLayoutParams(layoutparams);
         Cancel.setText("Cancel");
         Cancel.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        Cancel.setIcon(ContextCompat.getDrawable(this,R.drawable.baseline_cancel_24));
+        Cancel.setBackgroundColor(getColor(R.color.dark_cyan));
 
         linearLayoutInner.addView(Cancel);
         linearLayoutInner.addView(delete);
         linearLayoutInner.setLayoutParams(layoutparams);
         linearLayoutInner.setOrientation(LinearLayout.VERTICAL);
+
         cardview.addView(linearLayoutInner);
         linearLayout.addView(cardview);
     }

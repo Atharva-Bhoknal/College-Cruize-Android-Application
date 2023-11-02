@@ -44,6 +44,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -227,7 +228,7 @@ public class Book_Ride extends AppCompatActivity {
         });
     }
 
-    private void addDataToView(String name, String riderEmail, String riderMobile, String time,String loc) {
+    private void addDataToView( String riderEmail, String riderMobile, String time,String loc) {
 
         cardview = new CardView(getApplicationContext());
         LinearLayout linearLayoutInner = new LinearLayout(getApplicationContext());
@@ -263,17 +264,19 @@ public class Book_Ride extends AppCompatActivity {
         textview.setGravity(Gravity.CENTER);
         linearLayoutInner.addView(textview);
 
-        Button book = new Button(getApplicationContext());
+        MaterialButton book = new MaterialButton(this);
         book.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 //        delete.setLayoutParams(layoutparams);
         book.setText("Book");
+        book.setBackgroundColor(getColor(R.color.crimson));
+        book.setIcon(ContextCompat.getDrawable(this,R.drawable.destination));
         book.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 firestore.collection("Rides Available")
-                        .whereEqualTo("Location",pickuplocation )
+                        .whereEqualTo("Location",loc )
                         .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -288,7 +291,7 @@ public class Book_Ride extends AppCompatActivity {
                                     ord_data.put("Rider Name", rider_name);
                                     ord_data.put("Rider Email", riderEmail);
                                     ord_data.put("Rider MobileNo", riderMobile);
-                                    ord_data.put("Pick up Location", pickuplocation);
+                                    ord_data.put("Pick up Location", loc);
 
 
                                     firestore.collection("Requests")
@@ -356,7 +359,7 @@ public class Book_Ride extends AppCompatActivity {
                                 rider_mobile = documentChange.getDocument().getData().get("MobileNo").toString();
                                 time = documentChange.getDocument().getData().get("Time").toString();
                                 loc=documentChange.getDocument().getData().get("Location").toString();
-                                addDataToView(name, rider_email, rider_mobile, time,loc);
+                                addDataToView( rider_email, rider_mobile, time,loc);
                             }
 
                         }
@@ -387,7 +390,7 @@ public class Book_Ride extends AppCompatActivity {
                                 rider_mobile = documentChange.getDocument().getData().get("MobileNo").toString();
                                 time = documentChange.getDocument().getData().get("Time").toString();
                                 loc=documentChange.getDocument().getData().get("Location").toString();
-                                addDataToView(name, rider_email, rider_mobile, time,loc);
+                                addDataToView( rider_email, rider_mobile, time,loc);
                         }
                     } catch (Exception e) {
                         Toast.makeText(Book_Ride.this, "An error Occured!!", Toast.LENGTH_SHORT).show();

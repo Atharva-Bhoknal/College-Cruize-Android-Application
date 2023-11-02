@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -202,8 +203,10 @@ public class ride_details extends AppCompatActivity {
         payment.setLetterSpacing(0.2f);
         LinearLayout linearbtn = new LinearLayout(getApplicationContext());
 
-        linearbtn.addView(call);
-        linearbtn.addView(payment);
+//        linearbtn.addView(call);
+//        linearbtn.addView(payment);
+        linearLayoutInner.addView(call);
+        linearLayoutInner.addView(payment);
         linearLayoutInner.setLayoutParams(layoutparams);
         linearbtn.setLayoutParams(layoutparams);
         linearLayoutInner.addView(linearbtn);
